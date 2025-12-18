@@ -1,5 +1,4 @@
 import {Router} from 'express'
-import {check, validationResult} from "express-validator";
 import argon2 from "argon2";
 import prisma from "../libs/db.js";
 import passport from "../libs/auth.js";
@@ -18,7 +17,6 @@ router.post('/login',
 )
 
 router.post('/register',
-    check('email').isEmail(),
     async (req, res) => {
         if (!('email' in req.body) && !('password' in req.body) && !('name' in req.body)) {
             res.status(400)
@@ -32,7 +30,7 @@ router.post('/register',
                 reason: 'メールアドレスを入力してください',
             })
         }
-        if (!(validationResult(req).isEmpty())) {
+        if (!('email' in req.body)) {
             res.status(400)
             return res.json({
                 reason: '正しいメールアドレスを入力してください',
