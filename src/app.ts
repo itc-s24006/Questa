@@ -1,15 +1,13 @@
 import express from 'express'
 import indexRouter from './routes/index.js'
 import usersRouter from './routes/users.js'
+import questRouter from './routes/quest.js'
 
 const app = express()
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
+app.use('/quest', questRouter)
 
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
 
 export default app
